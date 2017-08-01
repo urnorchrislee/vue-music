@@ -1,6 +1,6 @@
 # vue-music
 
-> A Vue.js project
+> 炸鸡音乐App
 
 ## Build Setup
 
@@ -18,4 +18,10 @@ npm run build
 npm run build --report
 ```
 
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+### m-header(基础组件)
+封装m-header基础组件注意事项：
+1）目前的功能只是显示在主页，暂时没有业务逻辑功能，所以在template/style里面添加代码
+2）在App.vue文件中使用三部曲
+    - 使用import导入
+    - 使用components在组件中注册
+    - 在模板中使用（注意组件名称的大小写）
