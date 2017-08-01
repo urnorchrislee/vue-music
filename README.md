@@ -19,6 +19,7 @@ npm run build --report
 ```
 
 ### m-header(基础组件)
+
 封装m-header基础组件注意事项：
 * 目前的功能只是显示在主页，暂时没有业务逻辑功能，所以在template/style里面添加代码
 * 在App.vue文件中使用三部曲
