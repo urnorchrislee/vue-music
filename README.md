@@ -34,6 +34,8 @@ npm run dev
 
 ### 通过jsonp跨域抓取轮播图组件的数据
 
+* 参考[jsonp](https://github.com/webmodules/jsonp)
+
 ### 通过反向代理方式抓取推荐歌单的数据
 
 * 起因：由于host与refer的限制，前端不能直接修改request header的host与refer,通过后端代理的方式解决数据问题
