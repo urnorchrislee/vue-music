@@ -39,7 +39,7 @@ npm run build --report
 
 ## Components
 
-### m-header(基础组件)
+### m-header(页面头部组件)
 
 * 目前的功能只是显示在主页，暂时没有业务逻辑功能，所以在template/style里面添加代码
 * 在App.vue文件中使用三部曲
@@ -47,7 +47,7 @@ npm run build --report
     * 使用components在组件中注册
     * 在模板中使用（注意组件名称的大小写）
 
-### tab(基础组件)
+### tab(顶部导航组件)
 * tab组件相当于整个项目的导航
 * tab组件开发流程
     * 使用import导入路由，使用Vue.use(router)使用路由
@@ -56,3 +56,13 @@ npm run build --report
     * 每个router-link在激活后，都会添加router-link-active的class
     * 在App.vue中导入、注册、使用
 
+### slider(轮播图组件)
+* 轮播图效果
+* 轮播图组件开发流程
+    * slider-group(滚动的图片)
+        * 在页面结构上，使用slot插槽特性，将slider组件包裹的内容插槽至组件中
+        * 在js中，外界调用这个组件可以有哪些功能，将这个功能写在props里,暴露给外界
+        * slider计算宽度并初始化，初始化时机在生命周期钩子mounted
+        * 保证DOM成功渲染，setTimeout(function(){}, 20), $.nextTick
+
+    * dots(小圆点)
