@@ -32,6 +32,19 @@ npm run dev
 * jsonp请求的地址和普通Ajax地址有什么不一样的地方？
     * 地址的后面通常会有一个叫做callback的东东，callback=a
 
+### 通过jsonp跨域抓取轮播图组件的数据
+
+### 通过反向代理方式抓取推荐歌单的数据
+
+* 起因：由于host与refer的限制，前端不能直接修改request header的host与refer,通过后端代理的方式解决数据问题
+* 后端代理怎么做呢?
+    * 使用express框架在服务器端请求数据（正式线上服务器），那么在前端的表现就是请求本地服务器的接口
+    * 在dev.server.js中，使用express.Router()创建一个路由
+    * 在apiRoutes里面配置路由
+    * 在app.use('/api/getData', apiRoutes)挂载路由
+    * 在前端直接使用axios发送请求
+
+
 ## Components
 
 ### m-header(页面头部组件)
