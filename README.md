@@ -66,3 +66,5 @@ npm run build --report
         * 保证DOM成功渲染，setTimeout(function(){}, 20), $.nextTick
 
     * dots(小圆点)
+        * 确定小圆点的个数
+        * 确定当前滚动的是第几页

@@ -4,15 +4,21 @@
             <slot></slot>
         </div>
         <div class="dots">
-        
+            <span class="dot" v-for="(item, index) in dots" :class="{active: currentPageIndex === index}"></span>
         </div>
     </div>
 </template>
 <script>
-    //import BScroll from 'better-scroll'
+    import BScroll from 'better-scroll'
     import { addClass } from 'common/js/dom.js'
 
     export default {
+        data(){
+            return {
+                dots: [],
+                currentPageIndex: 0
+            }
+        },
         props: {
             loop: {
                 type: Boolean,
@@ -30,7 +36,8 @@
         mounted() {
             setTimeout(() => {
                 this._setSliderWidth()
-                //this._initSlider()
+                this._initDots()
+                this._initSlider()
             }, 20)
         },
         methods: {
@@ -55,7 +62,30 @@
 
                 this.$refs.sliderGroup.style.width = width + 'px' 
             },
-            _initSlider(){}
+            _initDots(){
+                this.dots = new Array(this.children.length)
+            },
+            _initSlider(){
+                this.slider = new BScroll(this.$refs.slider, {
+                    scrollX: true,          //滚动方向为 X 轴
+                    scrollY: false,         //滚动方向为 Y 轴
+                    momentum: false,        //当快速滑动时是否开启滑动惯性
+                    snap: true,             //该属性是给 slider 组件使用的
+                    snapLoop: this.loop,    //是否可以无缝循环轮播
+                    snapThreshold: 0.3,     //用手指滑动时页面可切换的阈值，大于这个阈值可以滑动的下一页
+                    snapSpeed: 400,         //轮播图切换的动画时间
+                    click: true             //是否派发click事件
+                })
+
+                this.slider.on('scrollEnd', ()=>{
+                    let pageIndex = this.slider.getCurrentPage().pageX
+                    if(this.loop){
+                        pageIndex -= 1
+                    }
+
+                    this.currentPageIndex = pageIndex
+                })
+            }
         }
     }
 </script>
