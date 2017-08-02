@@ -82,3 +82,5 @@ npm run dev
     * 自动播放
         * index的变化，计算index即可
         * 定时器的应用，要注意scrollEnd事件
+
+### scroll(滚动组件)
