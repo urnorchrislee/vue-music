@@ -11,11 +11,6 @@ npm install
 # serve with hot reload at localhost:8080
 npm run dev
 
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
 ```
 
 ## Api - 从QQ音乐抓取线上真实数据
@@ -68,3 +63,7 @@ npm run build --report
     * dots(小圆点)
         * 确定小圆点的个数
         * 确定当前滚动的是第几页
+    
+    * 自动播放
+        * index的变化，计算index即可
+        * 定时器的应用，要注意scrollEnd事件
