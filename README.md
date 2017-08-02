@@ -84,3 +84,9 @@ npm run dev
         * 定时器的应用，要注意scrollEnd事件
 
 ### scroll(滚动组件)
+* 封装scroll组件，项目中有其他的滚动的时候可以复用
+* scroll封装流程
+    * 组件的DOM结构，包裹的标签全部使用slot插槽
+    * 组件的功能，使用propsType记录
+    * 组件初始化的时机，以及一些事件的处理
+    * 组件有新的数据，更新 -> 使用watch观察数据的变化，然后refresh
