@@ -1,10 +1,13 @@
 <template>
-    <div class="rank">我是singer</div>
+    <div class="singer">
+        <ListView :data="singers"></ListView>
+    </div>
 </template>
 <script>
     import { getSingerList } from 'api/singer.js'
     import { ERR_OK } from 'common/js/config.js'
     import Singer from 'common/js/singer.js'
+    import ListView from 'base/listview/listview'
 
     const HOT_NAME = '热门'
     const HOT_SINGER_LEN = 10
@@ -20,12 +23,14 @@
                 this._getSingerList()
             }, 20)
         },
+        components:{
+            ListView
+        },
         methods: {
             _getSingerList (){
                 getSingerList().then((res)=>{
                     if(res.code === ERR_OK){
-                        this.singers = res.data.list
-                        console.log(this._normalizeSinger(res.data.list))
+                        this.singers = this._normalizeSinger(res.data.list)
                     }
                 })
             },
@@ -77,9 +82,10 @@
         }
     }
 </script>
-<style scoped>
-    div.rank{
-        color: red;
-        margin-top: 100px; 
-    }
+<style scoped lang="stylus" rel="stylesheet/stylus">
+  .singer
+    position: fixed
+    top: 88px
+    bottom: 0
+    width: 100%
 </style>
