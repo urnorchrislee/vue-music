@@ -96,3 +96,20 @@ npm run dev
 * loading设计
     * 一张图片，一段文字组成了loading组件
     * 文字作为props的title，暴露给用户，用户根据业务需求修改组件
+
+### listview(列表组件)
+* 歌手列表的展示
+* 单字母快速入口
+    * 首先构造一个可以遍历的数组数据
+    * group.title.subStr(0, 1)获取到单字母
+    * 添加事件
+
+* 左右联动
+    * 需要实时知道滚动的位置（listenScroll -> 借助scroll组件派发的'scroll'事件，返回值是pos）
+    * 根据滚动位置计算出落在了哪个listGrop的区间
+    * listGroup的区间对应的快速入口哪个索引高亮
+    * 使用watch + scroll事件观测变化，计算currentIndex，根据DOM映射添加current样式
+
+    * 单字母 -> listGroup
+
+    * listGroup -> 单字母
