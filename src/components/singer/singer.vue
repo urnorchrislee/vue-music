@@ -69,7 +69,6 @@
                     }))
                 })
 
-                console.log(map)
                 // 为了得到有序列表，处理map
                 let hot = []
                 let ret = []
