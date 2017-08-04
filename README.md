@@ -105,11 +105,7 @@ npm run dev
     * 添加事件
 
 * 左右联动
-    * 需要实时知道滚动的位置（listenScroll -> 借助scroll组件派发的'scroll'事件，返回值是pos）
+    * 需要实时知道滚动的位置（listenScroll -> 借助scroll组件派发的'scroll'事件，返回值是pos
     * 根据滚动位置计算出落在了哪个listGrop的区间
     * listGroup的区间对应的快速入口哪个索引高亮
     * 使用watch + scroll事件观测变化，计算currentIndex，根据DOM映射添加current样式
-
-    * 单字母 -> listGroup
-
-    * listGroup -> 单字母

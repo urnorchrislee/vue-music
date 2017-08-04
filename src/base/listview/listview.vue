@@ -4,7 +4,7 @@
             <li v-for="group in data" class="list-group" ref="listGroup">
                 <h2 class="list-group-title">{{ group.title }}</h2>
                 <ul>
-                    <li v-for="item in group.items" class="list-group-item">
+                    <li v-for="item in group.items" class="list-group-item" @click="selectItem(item)">
                         <img class="avatar" v-lazy="item.avatar" alt="">
                         <span class="name">{{ item.name }}</span>
                     </li>
@@ -21,6 +21,9 @@
                 </li>
             </ul>
         </div>
+        <div class="list-fixed" v-show="fixedTitle" ref="fixed">
+            <h1 class="fixed-title">{{ fixedTitle }}</h1>
+        </div>
     </Scroll>
 </template>
 <script>
@@ -28,6 +31,7 @@
     import { getData } from 'common/js/dom.js'
 
     const ANCHOR_HEIGHT = 18
+    const TITLE_HEIGHT = 30
 
     export default {
         created(){
@@ -50,15 +54,25 @@
                 return this.data.map((group) => {
                     return group.title.substring(0, 1)
                 })
+            },
+            fixedTitle(){
+                if(scrollY>0){
+                    return ' '
+                }
+                return this.data[this.currentIndex] ? this.data[this.currentIndex].title : ''
             }
         },
         data(){
             return {
                 scrollY : -1,
-                currentIndex: 0
+                currentIndex: 0,
+                diff: -1
             }
         },
         methods: {
+            selectItem(item){
+                this.$emit('select', item)
+            },
             onShortcutTouchstart(e){ // 当用户点击字母触发的事件
                 let anchorIndex = getData(e.target, 'index')
                 let firstTouch = e.touches[0]
@@ -87,12 +101,13 @@
                     return
                 }
                 
+                // 临界值判断
                 if(index < 0){
                     index = 0
                 } else if(index > this.listHeight.length - 2){
                     index = this.listHeight.length - 2
                 }
-                console.log(index)
+
                 this.scrollY = -this.listHeight[index]
                 this.$refs.listview.scrollToElement(this.$refs.listGroup[index], 0)
             },
@@ -131,12 +146,21 @@
 
                     if(-newY >= height1 && -newY < height2){
                         this.currentIndex = i
+                        this.diff = height2 + newY
                         return
                     }
                 }
 
                 // 滚动到底部，-newY大于最后一个元素的上限
                 this.currentIndex = listHeight.length - 2
+            },
+            diff(newVal){
+                let fixedTop = (newVal >0 && newVal < TITLE_HEIGHT) ? newVal-TITLE_HEIGHT : 0
+                if(this.fixedTop === fixedTop){
+                    return
+                }
+                this.fixedTop = fixedTop
+                this.$refs.fixed.style.transform = `translate3d(0, ${fixedTop}px, 0)`
             }
         },
         components: {
