@@ -28,3 +28,7 @@ export function getSingerList(){
         return Promise.resolve(res.data)
     })
 }
+
+export function getSingerDetail(){
+    
+}

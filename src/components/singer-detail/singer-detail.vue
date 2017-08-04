@@ -1,10 +1,21 @@
 <template>
     <transition name="slide-fade">
-        <div class="singer-detail">singer-detail</div>
+        <div class="singer-detail"></div>
     </transition>
 </template>
 <script>
-    export default {}
+    import { mapGetters } from 'vuex'
+
+    export default {
+        computed: {
+            ...mapGetters([
+                'singer'
+            ])
+        },
+        created(){
+            console.log(this.singer)
+        }
+    }
 </script>
 <style lang="stylus">
     .singer-detail
