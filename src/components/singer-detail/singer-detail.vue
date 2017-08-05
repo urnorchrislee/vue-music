@@ -1,6 +1,10 @@
 <template>
     <transition name="slide-fade">
-        <div class="singer-detail"></div>
+        <MusicList
+            :songs="songs"
+            :title="title"
+            :bg-image="bgImage"
+        ></MusicList>
     </transition>
 </template>
 <script>
@@ -8,6 +12,7 @@
     import { getSingerDetail } from 'api/singer'
     import { ERR_OK } from 'common/js/config'
     import { createSong } from 'common/js/song'
+    import MusicList from '@/components/music-list/music-list'
 
     export default {
         data(){
@@ -16,9 +21,18 @@
             }
         },
         computed: {
+            title(){
+                return this.singer.name
+            },
+            bgImage(){
+                return this.singer.avatar
+            },
             ...mapGetters([
                 'singer'
             ])
+        },
+        components: {
+            MusicList
         },
         created(){
             this._getDetail()
@@ -32,7 +46,6 @@
                 getSingerDetail(this.singer.id).then((res) => {
                     if(res.code == ERR_OK){
                         this.songs = this._normalizeSongs(res.data.list)
-                        console.log(this.songs)
                     }
                 })
             },
@@ -50,16 +63,6 @@
     }
 </script>
 <style lang="stylus">
-    .singer-detail
-        position: fixed
-        z-index: 100
-        left: 0
-        top: 0
-        right: 0
-        bottom: 0
-        background: pink
-        color: red
-        font-size: 30px
     .slide-fade-enter-active 
         transition: all .3s ease   
     .slide-fade-leave-active 
